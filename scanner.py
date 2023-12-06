@@ -62,6 +62,7 @@ class Scanner:
         ax.legend(loc='lower left')
         ax.grid(True)
         plt.title(r'DBSCAN Clustering', fontsize=18)
+        plt.suptitle(r'eps:{} min_pts:{}'.format(self.eps, self.min_pts))
         plt.savefig("visualization.png")
         plt.show()
 
