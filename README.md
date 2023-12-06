@@ -34,5 +34,5 @@ Number of clusters: 3
 
 Visualization Result
 
-![visualization](/Users/yychen/PycharmProjects/DBSCAN/visualization.png)
+![visualization](https://github.com/alice-create/CMSC5724-DBSCAN/blob/main/visualization.png)
 
