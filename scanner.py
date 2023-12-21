@@ -5,7 +5,7 @@ Created on Nov 20, 2023
 
 from cluster import Cluster
 import matplotlib.pyplot as plt
-from scipy.spatial import distance
+from math import *
 
 class Scanner:
 
@@ -16,7 +16,7 @@ class Scanner:
         self.clusters = set()
         self.cluster_num = 0
         self.visited = []
-        self.color = ['b','g','r','c','m','y','k','w']
+        self.color = ['b','g','r']
 
 
     def dbscan(self, data):
@@ -40,14 +40,14 @@ class Scanner:
                 if len(neighbour_pts) < self.min_pts:
                     noise.add_point(point)
                 else:
-                    name = 'cluster-%d' % self.cluster_num
+                    name = 'cluster-{}'.format(self.cluster_num)
                     new_cluster = Cluster(name, self.dim)
 
                     self.cluster_num += 1
                     self.expend_cluster(new_cluster, point, neighbour_pts)
 
-                    if self.dim == 2:
-                        ax.scatter(new_cluster.get_X(), new_cluster.get_Y(), c=self.color[self.cluster_num % len(self.color)],
+
+                    ax.scatter(new_cluster.get_X(), new_cluster.get_Y(), c=self.color[self.cluster_num % len(self.color)],
                                    marker='o', label=name)
 
                     # ax.hold(True)
@@ -92,7 +92,10 @@ class Scanner:
     def get_distance(self, from_point, to_point):
         p1 = [from_point['value'][k] for k in range(self.dim)]
         p2 = [to_point['value'][k] for k in range(self.dim)]
-        return distance.euclidean(p1, p2)
+        x = (p1[0] - p2[0]) ** 2
+        y = (p1[1] - p2[1]) ** 2
+        distance = sqrt(x + y)
+        return distance
 
     def region_query(self, point):
         result = []
